@@ -1,5 +1,8 @@
 package com.autocruis.ordersystem;
 
+import com.autocruis.ordersystem.entity.Customer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,14 +15,17 @@ public class HelloServlet extends HttpServlet {
         message = "Hello World!";
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        Customer customer= new Customer();
+        customer.setEmail("sun@laioffer.com");
+        customer.setPassword("123456");
+        customer.setFirstName("rick");
+        customer.setLastName("sun");
+        customer.setEnabled(true);
 
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        response.getWriter().print(mapper.writeValueAsString(customer));
     }
 
     public void destroy() {
