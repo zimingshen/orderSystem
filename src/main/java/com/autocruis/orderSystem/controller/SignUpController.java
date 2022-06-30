@@ -1,7 +1,7 @@
-package com.autocruis.ordersystem.controller;
+package com.autocruis.orderSystem.controller;
 
-import com.autocruis.ordersystem.entity.Customer;
-import com.autocruis.ordersystem.service.CustomerService;
+import com.autocruis.orderSystem.entity.Customer;
+import com.autocruis.orderSystem.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,9 @@ public class SignUpController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public void signUp(@RequestBody Customer customer) {
+//        if (customerService.getCustomer(customer.getEmail()) == null) {
+//            customerService.signUp(customer);
+//        }
         customerService.signUp(customer);
     }
 }

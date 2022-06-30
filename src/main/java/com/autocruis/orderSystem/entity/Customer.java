@@ -1,16 +1,27 @@
-package com.autocruis.ordersystem.entity;
+package com.autocruis.orderSystem.entity;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Ziming Shen
  * @create 2022-06-27 17:28
  */
-public class Customer {
+@Entity
+@Table(name = "customers")
+public class Customer  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id
     private String email;
     private String firstName;
     private String lastName;
     private String password;
     private boolean enabled;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+    private Cart cart;
 
     public String getEmail() {
         return email;
@@ -50,6 +61,14 @@ public class Customer {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
 
