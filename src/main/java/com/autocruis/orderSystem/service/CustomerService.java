@@ -20,6 +20,7 @@ public class CustomerService {
         customer.setCart(cart);
 
         customer.setEnabled(true);
+
         customerDao.signUp(customer);
     }
 
